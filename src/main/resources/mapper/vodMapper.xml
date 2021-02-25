@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.VodMapper">
+    <select id="getVod" resultType="com.bean.VideoData">
+        select * from vod order by score desc
+    </select>
+ 	<select id="getPlay" resultType="com.bean.VideoData">
+        select * from vod order by score desc limit 1
+    </select>
+    <select id="getAdVod" resultType="com.bean.VideoData">
+        select * from ad where id=1
+    </select>
+    <update id="updateVod" parameterType="com.bean.VideoData">
+    	update vod set
+    	isPlay=#{isPlay},
+    	lastTime=#{lastTime},
+    	score=#{score}
+    	where id=#{id}
+    </update>
+    <update id="updateAdVod" parameterType="com.bean.VideoData">
+    	update ad set
+    	vodName=#{vodName},
+    	lastTime=#{lastTime},
+    	score=#{score},
+    	isLocal=#{isLocal},
+    	isPlay=#{isPlay},
+    	src=#{src},
+    	type=#{type}
+    	where id=#{id}
+    </update>
+	<insert id="addVod" parameterType="com.bean.VideoData">
+	  insert into vod (vodName,isLocal,src,type,isPlay,score,lastTime)
+	  values (#{vodName},#{isLocal},#{src},#{type},#{isPlay},#{score},#{lastTime})
+	</insert>
+</mapper>
